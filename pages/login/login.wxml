@@ -1,0 +1,33 @@
+<doc-page title="员工登录" without-padding>
+  <!-- Field 基础用法 -->
+  <form bindsubmit="formSubmit">
+    <zan-panel title="Welcome back! Please login">
+      <zan-cell-group>
+        <zan-field
+          title="用户名"
+          placeholder="输入用户名"
+          name="userName"
+          value="{{ userInfo.userName }}">
+        </zan-field>
+
+        <zan-field
+          inputType="password"
+          title="密码"
+          name="password"
+          placeholder="输入密码"
+          value="{{ userInfo.password }}">
+        </zan-field>
+      </zan-cell-group>
+    </zan-panel>
+
+    <zan-button-group>
+      <button
+        type="primary"
+        form-type="submit"
+        loading="{{ gettingData }}"
+        >登录</button>
+    </zan-button-group>
+  </form>
+</doc-page>
+
+<zan-toast id="zan-toast"></zan-toast>

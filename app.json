@@ -1,0 +1,26 @@
+{
+  "pages": [
+    "pages/submission/submission",
+    "pages/login/login",
+    "pages/index/index",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/submission/submission",
+        "text": "提交订单"
+      },
+      {
+        "pagePath": "pages/logs/logs",
+        "text": "查询订单"
+      }
+    ]
+  }
+}

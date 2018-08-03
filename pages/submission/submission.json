@@ -1,0 +1,14 @@
+{
+  "usingComponents": {
+    "zan-button": "../../dist/btn/index",
+    "zan-button-group": "../../dist/btn-group/index",
+    "zan-cell-group": "../../dist/cell-group/index",
+    "zan-cell": "../../dist/cell/index",
+    "zan-field": "../../dist/field/index",
+    "zan-panel": "../../dist/panel/index",
+    "zan-date-picker": "../../dist/datetime-picker/index",
+    "zan-icon": "../../dist/icon/index",
+    "doc-page": "../../components/doc-page/index",
+    "zan-badge": "../../dist/badge/index"
+  }
+}
