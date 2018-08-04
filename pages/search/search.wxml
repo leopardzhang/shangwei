@@ -1,0 +1,23 @@
+<doc-page title="订单查询" without-padding>
+  <zan-panel>
+    <zan-search
+      placeholder="搜索..."
+      keyword="{{ inputValue }}"
+      bindchange="searchChange"
+      bindsearch="searchDone"
+      bindcancel="handleCancel"
+    >
+			<picker
+        slot="input"
+        mode="selector"
+        class="zan-search__selector"
+        bindchange="pickerChange"
+        style="width: 60px"
+        range="{{ range }}"
+        value="{{ rangeIndex }}"
+      >
+        <view class="picker">{{ range[rangeIndex] }}</view>
+      </picker>
+    </zan-search>
+  </zan-panel>
+</doc-page>

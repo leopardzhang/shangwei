@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/submission/submission",
-    "pages/login/login",
+		"pages/login/login",
+		"pages/submission/submission",
+		"pages/search/search",
     "pages/index/index",
     "pages/logs/logs"
   ],
@@ -18,7 +19,7 @@
         "text": "提交订单"
       },
       {
-        "pagePath": "pages/logs/logs",
+        "pagePath": "pages/search/search",
         "text": "查询订单"
       }
     ]
