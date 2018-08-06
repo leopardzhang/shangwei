@@ -20,4 +20,23 @@
       </picker>
     </zan-search>
   </zan-panel>
+  <view class="order_list">
+    <block wx:for="{{ [1,2,3,4,5] }}">
+      <view class="order_item">
+          <zan-panel>
+            <zan-card
+              card-class="test-card"
+                thumb="https://img.yzcdn.cn/upload_files/2016/11/25/FpqPXlrMRjKwJs8VdTu3ZDJCj4j5.jpeg?imageView2/2/w/200/h/200/q/90/format/jpeg"
+              useThumbSlot="{{ true }}"
+              useDetailSlot="{{ true }}"
+            >
+              <!-- 右侧详情 -->
+              <view slot="detail-slot" class="zan-card__detail">
+                我是自定义内容区域
+              </view>
+            </zan-card>
+          </zan-panel>
+      </view>
+    </block>
+  </view>
 </doc-page>

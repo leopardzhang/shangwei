@@ -1,6 +1,7 @@
 {
 	"navigationBarTitleText": "Search 搜索",
 	"usingComponents": {
+    "zan-card": "../../dist/card/index",
 		"zan-search": "../../dist/search/index",
 		"zan-panel": "../../dist/panel/index",
 		"doc-page": "../../components/doc-page/index"

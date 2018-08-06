@@ -2,9 +2,9 @@ Page({
 	data: {
 		inputValue: '',
 		range: [
-			'日期', 
+			'日期',
 			'酒店',
-			'统筹师'
+			'状态'
 		],
 		rangeIndex: 0
 	},
