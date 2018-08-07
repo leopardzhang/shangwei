@@ -60,8 +60,10 @@
             </view>
           </block>
         </view>
+        <zan-cell>
+          <zan-button bindtap="submit" type="primary">确认提交</zan-button>
+        </zan-cell>
       </zan-panel>
-      
     </zan-cell-group>
   </zan-panel>
 </doc-page>

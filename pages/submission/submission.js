@@ -1,4 +1,6 @@
 // pages/submission/submission.js
+const app = getApp();
+
 Page({
 
   /**
@@ -31,7 +33,6 @@ Page({
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
       success: function (res) {
-        console.log(res);
         if (res.errMsg === "chooseImage:ok") {
           const tempFilePaths = res.tempFilePaths;
 
@@ -61,5 +62,25 @@ Page({
     this.setData({
       imgList
     })
+  },
+
+  /**
+   * 上传
+   */
+  submit() {
+    const imgList = this.data.imgList;
+    for(const item of imgList) {
+      wx.uploadFile({
+        url: `${app.globalData.url}/images`,
+        filePath: item,
+        name: 'images',
+        success(res) {
+          console.log('success');
+        },
+        fail(err) {
+          console.log('失败了');
+        }
+      })
+    }
   }
 })
