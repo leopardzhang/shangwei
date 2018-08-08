@@ -71,7 +71,7 @@ Page({
     const imgList = this.data.imgList;
     for(const item of imgList) {
       wx.uploadFile({
-        url: `${app.globalData.url}/images`,
+        url: `${app.globalData.url}/order/images`,
         filePath: item,
         name: 'images',
         success(res) {

@@ -1,39 +1,19 @@
-const fs = require("fs");
 const express = require('express');
-const bodyParser = require("body-parser");
 const multer = require('multer');
-const utils = require('./utils/utils');
-const { folderName } = utils;
+const bodyParser = require('body-parser');
 
+const order = require('./routers/order');
+const login = require('./routers/login');
 
 const app = express();
 
-const upload = multer({
-    dest: `uploads/${folderName}`
-});
+app.use(bodyParser.json());
 
-app.post('/images', upload.array('images', 9), function(req, res, next) {
+/* order-router */
+app.use('/order', order);
+app.use('/login', login);
 
-	fs.mkdir(`uploads/${folderName}`, (err) => {
-		for(const uploadImages of req.files) {
-			fs.rename(uploadImages.path, `uploads/${folderName}/` + uploadImages.originalname, function(err) {
-	            if (err) {
-	                throw err;
-	            }
-	            console.log(uploadImages.originalname);
-	        })
-		}
-	});
-    res.writeHead(200, {
-        "Access-Control-Allow-Origin": "*"
-    });
-    res.end(JSON.stringify(req.files) + JSON.stringify(req.body));
-});
-
-
-
-
-app.use(express.static('files'));
+app.use(express.static('www'));
 
 app.listen('3000');
 console.log('server is running at localhost:3000');

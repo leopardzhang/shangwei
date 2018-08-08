@@ -1,5 +1,6 @@
+const app = getApp();
 const config = require('./config');
-const Toast = require('../../dist/toast/toast');
+const Toptips = require('../../dist/toptips/toptips');
 
 Page({
   data: {
@@ -23,11 +24,34 @@ Page({
     } = data.detail.value;
     
     if (userName === '' || password === '') { // 用户名密码没填
-      Toast({
-        message: '用户名或密码不能为空',
-        selector: '#zan-toast'
-      });
+      Toptips('用户名和密码不能为空');
     } else {
+      wx.login({
+        success(res) {
+          if(res.errMsg !== 'login:ok') {
+            Toptips('获取code失败请联系管理员');
+          } else {
+            const code = res.code;
+
+            wx.request({
+              url: `${app.globalData.url}/login`,
+              method: 'POST',
+              header: 'application/json',
+              data: {
+                code,
+                userName,
+                password
+              },
+              success(res) {
+                console.log(res);
+              }
+            });
+          }
+        }
+      })
+      return false;
+
+
       this.setData({
         gettingData: true
       });

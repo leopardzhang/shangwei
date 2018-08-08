@@ -30,4 +30,8 @@
   </form>
 </doc-page>
 
-<zan-toast id="zan-toast"></zan-toast>
+<zan-toptips
+  id="zan-toptips"
+  content="{{ content }}"
+  is-show="{{ $zanui.toptips.show }}"
+/>
