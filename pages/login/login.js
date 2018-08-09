@@ -1,5 +1,4 @@
 const app = getApp();
-const config = require('./config');
 const Toptips = require('../../dist/toptips/toptips');
 
 Page({
@@ -18,6 +17,10 @@ Page({
    * 登录
    */
   formSubmit(data) {
+    const _this = this;
+    this.setData({
+      gettingData: true
+    });
     const {
       userName,
       password
@@ -44,27 +47,27 @@ Page({
               },
               success(res) {
                 console.log(res);
+                if(res.data.code == 1) {
+                  Toptips('用户名或密码错误');
+                } else {
+                  app.globalData.openid = res.data.openid;
+                  wx.switchTab({
+                    url: '../submission/submission',
+                  })
+                }
+              },
+              complete() {
+                _this.setData({
+                  gettingData: false
+                });
+              },
+              fail() {
+                Toptips('登录失败！请检查网络状态');
               }
             });
           }
         }
-      })
-      return false;
-
-
-      this.setData({
-        gettingData: true
       });
-      
-      setTimeout(() => {
-        this.setData({
-          gettingData: false
-        });
-
-        wx.switchTab({
-          url: '../submission/submission',
-        })
-      }, 1000);
     }
   }
 });
