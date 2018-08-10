@@ -1,69 +1,85 @@
 <doc-page title="提交订单" without-padding>
-  <zan-panel class="picker-panel-demo" title="订单信息">
-    <zan-cell-group>
-      <zan-cell title="选择时间">
-        <zan-date-picker
-          slot="footer"
-          not-use="{{['hours', 'minutes', 'seconds']}}"
-          placeholder="选择日期"
-        />
-      </zan-cell>
-      <zan-field
-        title="地点"
-        right="{{ true }}"
-        placeholder="请输入地点"
-      >
-      </zan-field>
-      <zan-field
-        title="统筹师"
-        right="{{ true }}"
-        placeholder="请输入统筹师姓名"
-      >
-      </zan-field>
-      <zan-field
-        title="要求"
-        right="{{ true }}"
-        placeholder="附加要求"
-      >
-      </zan-field>
-      <zan-field
-        title="内容"
-        right="{{ true }}"
-        placeholder="内容"
-      >
-      </zan-field>
-      <zan-field
-        title="价格"
-        inputType="digit"
-        right="{{ true }}"
-        placeholder="输入价格"
-      >
-      </zan-field>
-      <zan-field
-        title="联系电话"
-        inputType="number"
-        right="{{ true }}"
-        placeholder="输入电话"
-      >
-      </zan-field>
-      <zan-cell title="上传图片" bindtap="handleTap"></zan-cell>
-      <zan-panel class="panel-example">
-        <view class='img_list' style="padding: 30rpx;">
-          <view class='up-load-img' bindtap="choseImg">
-            <zan-icon type="photograph"></zan-icon>
-            <text class="zan-font-12">上传图片</text>
-          </view>
-          <block wx:for="{{ imgList }}" wx:for-item="img" wx:key="img">
-            <view class="img_box">
-              <zan-badge data-index="{{ index }}" bindtap="remove">×</zan-badge>
-              <image class="img" mode="aspectFill" src="{{ img }}" />
-            </view>
-          </block>
-        </view>
-        <zan-cell>
-          <zan-button bindtap="submit" type="primary">确认提交</zan-button>
+  <form bindsubmit="upload">
+    <zan-panel class="picker-panel-demo" title="订单信息">
+      <zan-cell-group>
+        <zan-cell title="选择时间">
+          <zan-date-picker
+            slot="footer"
+            bindchange="dateChange"
+            format="YYYY-MM-DD"
+            not-use="{{['hours', 'minutes', 'seconds']}}"
+            placeholder="选择日期"
+          />
         </zan-cell>
-      </zan-panel>
-    </zan-cell-group>
-  </zan-panel>
+        <zan-field
+          name="address"
+          title="地点"
+          right="{{ true }}"
+          placeholder="请输入地点"
+        >
+        </zan-field>
+        <zan-field
+          name="ordinate"
+          title="统筹师"
+          right="{{ true }}"
+          placeholder="统筹师姓名"
+        >
+        </zan-field>
+        <zan-field
+          name="requireMent"
+          title="要求"
+          right="{{ true }}"
+          placeholder="附加要求"
+        >
+        </zan-field>
+        <zan-field
+          name="content"
+          title="内容"
+          right="{{ true }}"
+          placeholder="内容"
+        >
+        </zan-field>
+        <zan-field
+          name="price"
+          title="价格"
+          inputType="digit"
+          right="{{ true }}"
+          placeholder="输入价格"
+        >
+        </zan-field>
+        <zan-field
+          name="tel"
+          title="联系电话"
+          inputType="number"
+          right="{{ true }}"
+          placeholder="输入电话"
+        >
+        </zan-field>
+        <zan-cell title="上传图片"></zan-cell>
+        <zan-panel class="panel-example">
+          <view class='img_list' style="padding: 30rpx;">
+            <view class='up-load-img' bindtap="choseImg">
+              <zan-icon type="photograph"></zan-icon>
+              <text class="zan-font-12">上传图片</text>
+            </view>
+            <block wx:for="{{ imgList }}" wx:for-item="img" wx:key="img">
+              <view class="img_box">
+                <zan-badge data-index="{{ index }}" bindtap="remove">×</zan-badge>
+                <image class="img" mode="aspectFill" src="{{ img }}" />
+              </view>
+            </block>
+          </view>
+          <zan-cell>
+            <button
+              type="primary"
+              form-type="submit"
+              bindtap="submit"
+            >
+              确认提交
+            </button>
+          </zan-cell>
+        </zan-panel>
+      </zan-cell-group>
+    </zan-panel>
+  </form>
 </doc-page>

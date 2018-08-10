@@ -47,7 +47,7 @@ Page({
               },
               success(res) {
                 console.log(res);
-                if(res.data.code == 1) {
+                if(res.data.code !== 0) {
                   Toptips('用户名或密码错误');
                 } else {
                   app.globalData.openid = res.data.openid;

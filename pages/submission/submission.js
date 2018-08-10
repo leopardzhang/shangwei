@@ -2,17 +2,10 @@
 const app = getApp();
 
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    imgList: []
+    imgList: [],
+    dateTime: ''
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function(options) {
     setTimeout(() => {
       this.setData({
@@ -32,7 +25,7 @@ Page({
       count: num,
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
-      success: function (res) {
+      success: function(res) {
         if (res.errMsg === "chooseImage:ok") {
           const tempFilePaths = res.tempFilePaths;
 
@@ -68,12 +61,27 @@ Page({
    * 上传
    */
   submit() {
+    
+  },
+
+  /**
+   * 表单事件
+   */
+  upload(e) {
+    const _this = this;
     const imgList = this.data.imgList;
-    for(const item of imgList) {
+    const formData = e.detail.value;
+
+    Object.assign(formData, {
+      dateTime: _this.data.dateTime
+    });
+
+    for (const item of imgList) {
       wx.uploadFile({
         url: `${app.globalData.url}/order/images`,
         filePath: item,
         name: 'images',
+        formData,
         success(res) {
           console.log('success');
         },
@@ -82,5 +90,26 @@ Page({
         }
       })
     }
+  
+    // const promiseUpload = new Promise(function (resolve, reject) {
+    //   wx.request({
+    //     url: `${app.globalData.url}/order/info`,
+    //     data,
+    //     method: 'GET',
+    //     success(res) {
+    //       console.log(res);
+    //     }
+    //   })
+    // });
+  },
+
+  /**
+   * 选择时间
+   */
+  dateChange(e) {
+    const dateTime = new Date(e.detail.date).getTime();
+    this.setData({
+      dateTime
+    });
   }
 })

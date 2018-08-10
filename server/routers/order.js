@@ -20,7 +20,7 @@ const upload = multer({
 	获取订单信息
 */
 router.post('/images', upload.array('images', 9), function(req, res, next) {
-
+	console.log(req.body);
 	for(const uploadImages of req.files) {
 		fs.rename(uploadImages.path, `uploads/${folderName}/` + uploadImages.originalname, function(err) {
             if (err) {
