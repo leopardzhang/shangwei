@@ -2,59 +2,112 @@
   <form bindsubmit="upload">
     <zan-panel class="picker-panel-demo" title="订单信息">
       <zan-cell-group>
-        <zan-cell title="选择时间">
+        <zan-cell title="婚期">
           <zan-date-picker
             slot="footer"
+            data-type="0"
             bindchange="dateChange"
             format="YYYY-MM-DD"
             not-use="{{['hours', 'minutes', 'seconds']}}"
-            placeholder="选择日期"
+            placeholder="选择婚礼日期"
           />
         </zan-cell>
+
         <zan-field
-          name="address"
-          title="地点"
+          name="field"
+          title="场次"
           right="{{ true }}"
-          placeholder="请输入地点"
+          placeholder="场次"
         >
         </zan-field>
+
         <zan-field
-          name="ordinate"
-          title="统筹师"
+          name="hotel"
+          title="酒店"
           right="{{ true }}"
-          placeholder="统筹师姓名"
+          placeholder="酒店名称或地点"
         >
         </zan-field>
+      
         <zan-field
-          name="requireMent"
-          title="要求"
+          name="num"
+          title="件数"
           right="{{ true }}"
-          placeholder="附加要求"
+          placeholder="件数"
         >
         </zan-field>
+      
         <zan-field
-          name="content"
-          title="内容"
+          name="style"
+          title="风格"
           right="{{ true }}"
-          placeholder="内容"
+          placeholder="风格"
         >
         </zan-field>
+        
+        <zan-field
+          name="color"
+          title="色系"
+          right="{{ true }}"
+          placeholder="色系"
+        >
+        </zan-field>
+        
+        <zan-field
+          name="element"
+          title="元素"
+          right="{{ true }}"
+          placeholder="元素"
+        >
+        </zan-field>
+
         <zan-field
           name="price"
-          title="价格"
+          title="成本"
           inputType="digit"
           right="{{ true }}"
-          placeholder="输入价格"
+          placeholder="成本价格"
         >
         </zan-field>
+
+        <zan-field
+          name="address"
+          title="送达地址"
+          inputType="destination"
+          right="{{ true }}"
+          placeholder="送达地址"
+        >
+        </zan-field>
+
+        <zan-field
+          name="person"
+          title="接收人"
+          inputType="destination"
+          right="{{ true }}"
+          placeholder="接收人姓名"
+        >
+        </zan-field>
+
         <zan-field
           name="tel"
           title="联系电话"
           inputType="number"
           right="{{ true }}"
-          placeholder="输入电话"
+          placeholder="联系电话"
         >
         </zan-field>
+
+        <zan-cell title="接收时间">
+          <zan-date-picker
+            slot="footer"
+            data-type="1"
+            bindchange="dateChange"
+            format="YYYY-MM-DD hh:mm"
+            not-use="{{['minutes','seconds']}}"
+            placeholder="选择送达日期和时间"
+          />
+        </zan-cell>
+
         <zan-cell title="上传图片"></zan-cell>
         <zan-panel class="panel-example">
           <view class='img_list' style="padding: 30rpx;">

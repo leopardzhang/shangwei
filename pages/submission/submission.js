@@ -4,7 +4,8 @@ const app = getApp();
 Page({
   data: {
     imgList: [],
-    dateTime: ''
+    weddingTime: '',
+    sendTime: ''
   },
   onLoad: function(options) {
     setTimeout(() => {
@@ -73,9 +74,10 @@ Page({
     const formData = e.detail.value;
 
     Object.assign(formData, {
-      dateTime: _this.data.dateTime
+      weddingTime: _this.data.weddingTime,
+      sendTime: _this.data.sendTime 
     });
-
+    console.log(formData);
     for (const item of imgList) {
       wx.uploadFile({
         url: `${app.globalData.url}/order/images`,
@@ -107,9 +109,18 @@ Page({
    * 选择时间
    */
   dateChange(e) {
-    const dateTime = new Date(e.detail.date).getTime();
-    this.setData({
-      dateTime
-    });
+    const typeId = e.target.dataset.type;
+    console.log(e.detail.date);
+    const dateTime = new Date(e.detail.date);
+    if (typeId == 0) {
+      this.setData({
+        weddingTime: dateTime
+      });
+    } else {
+      this.setData({
+        sendTime: dateTime
+      });
+    }
+    
   }
 })
