@@ -1,5 +1,6 @@
 // pages/submission/submission.js
 const app = getApp();
+const Toast = require('../../dist/toast/toast');
 
 Page({
   data: {
@@ -8,11 +9,7 @@ Page({
     sendTime: ''
   },
   onLoad: function(options) {
-    setTimeout(() => {
-      this.setData({
-        date: new Date('2300/12/12').getTime()
-      })
-    }, 100)
+    
   },
   /**
    * 用户点击上传图片事件
@@ -59,50 +56,64 @@ Page({
   },
 
   /**
-   * 上传
-   */
-  submit() {
-    
-  },
-
-  /**
    * 表单事件
    */
   upload(e) {
+    Toast({
+      type: 'loading',
+      message: '上传数据中...',
+      selector: '#zan-toast-test'
+    });
+
     const _this = this;
     const imgList = this.data.imgList;
     const formData = e.detail.value;
 
     Object.assign(formData, {
       weddingTime: _this.data.weddingTime,
-      sendTime: _this.data.sendTime 
+      sendTime: _this.data.sendTime,
+      salespersonID: app.globalData.openid
     });
-    console.log(formData);
-    for (const item of imgList) {
-      wx.uploadFile({
-        url: `${app.globalData.url}/order/images`,
-        filePath: item,
-        name: 'images',
-        formData,
+
+    const promiseUpload = new Promise((resolve, reject) => {
+      wx.request({
+        url: `${app.globalData.url}/order/info`,
+        data: formData,
+        method: 'GET',
         success(res) {
-          console.log('success');
+          resolve(res.data.info.insertId);
         },
         fail(err) {
-          console.log('失败了');
+          reject(err);
         }
       })
-    }
-  
-    // const promiseUpload = new Promise(function (resolve, reject) {
-    //   wx.request({
-    //     url: `${app.globalData.url}/order/info`,
-    //     data,
-    //     method: 'GET',
-    //     success(res) {
-    //       console.log(res);
-    //     }
-    //   })
-    // });
+    });
+
+    promiseUpload.then((insertId) => {
+      const imgCount = imgList.length;
+      let num = 1;
+      for (const item of imgList) {
+        wx.uploadFile({
+          url: `${app.globalData.url}/order/images`,
+          filePath: item,
+          name: 'images',
+          formData: { insertId },
+          success(res) {
+            Toast({
+              type: 'loading',
+              message: `上传图片中${num}/${imgCount}`,
+              selector: '#zan-toast-test'
+            });
+            num++;
+          },
+          fail(err) {
+            console.log('失败了');
+          }
+        })
+      }
+    });
+
+    
   },
 
   /**

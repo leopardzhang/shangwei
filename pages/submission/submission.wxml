@@ -1,3 +1,5 @@
+<import src="/dist/toast/index.wxml" />
+
 <doc-page title="提交订单" without-padding>
   <form bindsubmit="upload">
     <zan-panel class="picker-panel-demo" title="订单信息">
@@ -102,7 +104,7 @@
             slot="footer"
             data-type="1"
             bindchange="dateChange"
-            format="YYYY-MM-DD hh:mm"
+            format="YYYY-MM-DD hh"
             not-use="{{['minutes','seconds']}}"
             placeholder="选择送达日期和时间"
           />
@@ -126,7 +128,6 @@
             <button
               type="primary"
               form-type="submit"
-              bindtap="submit"
             >
               确认提交
             </button>
@@ -136,3 +137,5 @@
     </zan-panel>
   </form>
 </doc-page>
+
+<zan-toast id="zan-toast-test"></zan-toast>

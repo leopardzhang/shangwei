@@ -14,6 +14,7 @@ app.use('/order', order);
 app.use('/login', login);
 
 app.use(express.static('www'));
+app.use(express.static('uploads'));
 
 app.listen('3000');
 console.log('server is running at localhost:3000');

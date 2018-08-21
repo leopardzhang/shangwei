@@ -1,20 +1,17 @@
+/**
+ * 登录
+ * 先验证登录信息是否正确
+ * 然后用户发送过来的信息去微信服务器换取用户的openID
+ */
 const https = require('https');
 const express = require('express');
-const mysql = require('mysql');
 const router = express.Router();
 
 const appid = require('../common/appId');
 const wxApi = require('../common/wxApi');
 const secret = require('../common/secret');
 
-const connection = mysql.createConnection({
-	host     : 'localhost',
-	user     : 'root',
-	password : 'root',
-	database : 'shangwei'
-});
-
-connection.connect();
+const connection = require('../dataBase');
 
 router.post('', (req, res) => {
 	const {

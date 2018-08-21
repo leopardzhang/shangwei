@@ -4,6 +4,7 @@ const fs = require('fs');
 const multer = require('multer');
 
 const utils = require('../utils/utils');
+const connection = require('../dataBase');
 const { folderName } = utils;
 
 fs.mkdir(`uploads/${folderName}`, (err) => {
@@ -19,22 +20,53 @@ const upload = multer({
 /*
 	获取订单信息
 */
-router.post('/images', upload.array('images', 9), function(req, res, next) {
-	console.log(req.body);
+router.get('/info', (req, res, next) => {
+	let [keys, values] = ['', ''];
+	for (const key in req.query) {
+		keys += `${key},`;
+		values += `'${req.query[key]}',`;
+	}
+	keys = keys.substring(0, keys.length - 1);
+	values = values.substring(0, values.length - 1);
+	connection.query(`INSERT INTO ordertable (${keys}) VALUES (${values})`, (err, database, fields) => {
+		if(err) {
+			console.log(err);
+		} else {
+			res.json({
+				code: 0,
+				info: database
+			});
+			res.end();
+		}
+	});
+});
+
+/*
+	获取订单图片
+*/
+router.post('/images', upload.array('images', 9), (req, res, next) => {
+	const insertId = parseInt(req.body.insertId);
 	for(const uploadImages of req.files) {
-		fs.rename(uploadImages.path, `uploads/${folderName}/` + uploadImages.originalname, function(err) {
+		fs.rename(uploadImages.path, `uploads/${folderName}/` + uploadImages.originalname, (err) => {
             if (err) {
                 throw err;
             }
-            console.log(uploadImages.originalname);
 			/* 图片路径 */
-			const path = `uploads/${folderName}${uploadImages.originalname}/`
+			const path = `${uploadImages.originalname}`;
+			connection.query(`INSERT INTO imagetable (url,id) VALUES ('${path}',${insertId})`, (err) => {
+				if(err) {
+					res.json({
+						code: 1
+					});
+				} else {
+					res.json({
+						code: 0
+					});
+				}
+				res.end();
+			});
         })
 	}
-    res.writeHead(200, {
-        "Access-Control-Allow-Origin": "*"
-    });
-    res.end(JSON.stringify(req.files) + JSON.stringify(req.body));
 });
 
 module.exports = router;
