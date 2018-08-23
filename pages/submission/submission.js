@@ -90,8 +90,6 @@ Page({
     });
 
     promiseUpload.then((insertId) => {
-      const imgCount = imgList.length;
-      let num = 1;
       for (const item of imgList) {
         wx.uploadFile({
           url: `${app.globalData.url}/order/images`,
@@ -101,10 +99,9 @@ Page({
           success(res) {
             Toast({
               type: 'loading',
-              message: `上传图片中${num}/${imgCount}`,
+              message: `上传图片中...`,
               selector: '#zan-toast-test'
             });
-            num++;
           },
           fail(err) {
             console.log('失败了');

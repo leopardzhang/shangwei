@@ -18,7 +18,7 @@ const upload = multer({
 });
 
 /*
-	获取订单信息
+	上传订单信息
 */
 router.get('/info', (req, res, next) => {
 	let [keys, values] = ['', ''];
@@ -42,7 +42,7 @@ router.get('/info', (req, res, next) => {
 });
 
 /*
-	获取订单图片
+	上传订单图片
 */
 router.post('/images', upload.array('images', 9), (req, res, next) => {
 	const insertId = parseInt(req.body.insertId);

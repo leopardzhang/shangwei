@@ -4,14 +4,16 @@ const bodyParser = require('body-parser');
 
 const order = require('./routers/order');
 const login = require('./routers/login');
+const register = require('./routers/register');
 
 const app = express();
 
 app.use(bodyParser.json());
 
-/* order-router */
+/* routers */
 app.use('/order', order);
 app.use('/login', login);
+app.use('/register', register);
 
 app.use(express.static('www'));
 app.use(express.static('uploads'));

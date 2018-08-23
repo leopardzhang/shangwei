@@ -7,9 +7,9 @@ const https = require('https');
 const express = require('express');
 const router = express.Router();
 
-const appid = require('../common/appId');
-const wxApi = require('../common/wxApi');
-const secret = require('../common/secret');
+const appid = require('../common/appId');	//小程序标识
+const wxApi = require('../common/wxApi');	//微信相关api
+const secret = require('../common/secret');	//小程序secret
 
 const connection = require('../dataBase');
 
