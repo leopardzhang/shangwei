@@ -1,15 +1,14 @@
 // pages/submission/submission.js
 const app = getApp();
 const Toast = require('../../dist/toast/toast');
+const utils = require('../../utils/util');
+const { formatTime } = utils;
 
 Page({
   data: {
     imgList: [],
     weddingTime: '',
     sendTime: ''
-  },
-  onLoad: function(options) {
-    
   },
   /**
    * 用户点击上传图片事件
@@ -70,11 +69,11 @@ Page({
     const formData = e.detail.value;
 
     Object.assign(formData, {
-      weddingTime: _this.data.weddingTime,
-      sendTime: _this.data.sendTime,
+      weddingTime: formatTime(_this.data.weddingTime),
+      sendTime: formatTime(_this.data.sendTime, 1),
       salespersonID: app.globalData.openid
     });
-
+    console.log(formData);
     const promiseUpload = new Promise((resolve, reject) => {
       wx.request({
         url: `${app.globalData.url}/order/info`,

@@ -104,8 +104,8 @@
             slot="footer"
             data-type="1"
             bindchange="dateChange"
-            format="YYYY-MM-DD hh"
-            not-use="{{['minutes','seconds']}}"
+            format="YYYY-MM-DD hh:mm"
+            not-use="{{['seconds']}}"
             placeholder="选择送达日期和时间"
           />
         </zan-cell>

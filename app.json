@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/submission/submission",
     "pages/login/login",
+    "pages/submission/submission",
     "pages/index/index",
     "pages/search/search",
     "pages/logs/logs"
@@ -9,7 +9,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "尚维婚礼策划订单工具",
+    "navigationBarTitleText": "订单工具",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
