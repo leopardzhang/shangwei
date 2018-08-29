@@ -17,9 +17,9 @@ const upload = multer({
     dest: `uploads/${folderName}`
 });
 
-/*
-	上传订单信息
-*/
+/**
+ * 上传订单信息
+ */
 router.get('/info', (req, res, next) => {
 	let [keys, values] = ['', ''];
 	for (const key in req.query) {
@@ -41,9 +41,9 @@ router.get('/info', (req, res, next) => {
 	});
 });
 
-/*
-	上传订单图片
-*/
+/**
+ * 上传图片
+ */
 router.post('/images', upload.array('images', 9), (req, res, next) => {
 	const insertId = parseInt(req.body.insertId);
 	for(const uploadImages of req.files) {
@@ -51,8 +51,7 @@ router.post('/images', upload.array('images', 9), (req, res, next) => {
             if (err) {
                 throw err;
             }
-			/* 图片路径 */
-			const path = `${uploadImages.originalname}`;
+			const path = `${uploadImages.originalname}`;	// 图片路径
 			connection.query(`INSERT INTO imagetable (url,id) VALUES ('${path}',${insertId})`, (err) => {
 				if(err) {
 					res.json({
@@ -67,6 +66,10 @@ router.post('/images', upload.array('images', 9), (req, res, next) => {
 			});
         })
 	}
+});
+
+router.get('/search', (req, res, next) => {
+	
 });
 
 module.exports = router;

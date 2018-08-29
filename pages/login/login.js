@@ -7,10 +7,35 @@ Page({
       userName: '',
       password: ''
     },
-    gettingData: false
+    gettingData: false,
+    items: [{
+        name: '1',
+        value: '统筹师',
+        checked: 'true'
+      },
+      {
+        name: '2',
+        value: '花艺师'
+      }
+    ],
+    identity: '1'
   },
-  onLoad(params) {
+  onLoad() {
+    wx.getStorage({
+      key: 'openid',
+      success(res) {
+        app.globalData.openid = res.data;
+        wx.switchTab({
+          url: '../submission/submission',
+        });
+      }
+    });
+  },
 
+  handleRadioChange(e) {
+    this.setData({
+      identity: e.detail.detail.value
+    })
   },
 
   /**
@@ -25,35 +50,36 @@ Page({
       userName,
       password
     } = data.detail.value;
-    
     if (userName === '' || password === '') { // 用户名密码没填
       Toptips('用户名和密码不能为空');
     } else {
       wx.login({
         success(res) {
-          if(res.errMsg !== 'login:ok') {
+          if (res.errMsg !== 'login:ok') {
             Toptips('获取code失败请联系管理员');
           } else {
             const code = res.code;
-
             wx.request({
               url: `${app.globalData.url}/login`,
               method: 'POST',
-              header: 'application/json',
               data: {
                 code,
                 userName,
-                password
+                password,
+                identity: _this.data.identity
               },
               success(res) {
-                if(res.data.code !== 0) {
-                  Toptips('用户名或密码错误');
-                } else {
-                  app.globalData.openid = res.data.openid;
-                  wx.switchTab({
-                    url: '../submission/submission',
-                  })
-                }
+                const openid = res.data.openid;
+                wx.setStorage({
+                  key: 'openid',
+                  data: openid,
+                  success(res) {
+                    wx.switchTab({
+                      url: '../submission/submission',
+                    });
+                  }
+                });
+                app.globalData.openid = openid;
               },
               complete() {
                 _this.setData({

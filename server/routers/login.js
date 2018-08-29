@@ -7,59 +7,59 @@ const https = require('https');
 const express = require('express');
 const router = express.Router();
 
-const appid = require('../common/appId');	//小程序标识
-const wxApi = require('../common/wxApi');	//微信相关api
-const secret = require('../common/secret');	//小程序secret
+const appid = require('../common/appId'); //小程序标识
+const wxApi = require('../common/wxApi'); //微信相关api
+const secret = require('../common/secret'); //小程序secret
 
 const connection = require('../dataBase');
 
 router.post('', (req, res) => {
-	const {
-		code,
-		userName,
-		password
-	} = req.body;
+    const {
+        code,
+        userName,
+        password,
+		identity
+    } = req.body;
 
-	if(code) {
-		const params = {
-			appid,
-			secret,
-			js_code: code,
-			grant_type: 'authorization_code'
-		}
-		connection.query(`SELECT * FROM usertable WHERE username='${userName}' and password='${password}'`, (err, database, fields) => {
-			if(err) {
-				res.json({
-					code: -2
-				});
-			} else if (database.length) {
-				const options = {
-					hostname: wxApi.hostname,
-					path: `${wxApi.path}?appid=${params.appid}&secret=${params.secret}&js_code=${params.js_code}&grant_type=${params.grant_type}`,
-					method: 'GET'
-				}
-				const req = https.request(options, (response) => {
-					response.on('data', (d) => {
-						const data = JSON.parse(d.toString());
+    if (code && password === 'shangwei123') {
+        const params = {
+            appid,
+            secret,
+            js_code: code,
+            grant_type: 'authorization_code'
+        }
 
-						res.json({
-							code: 0,
-							openid: data.openid
-						});
+        const options = {
+            hostname: wxApi.hostname,
+            path: `${wxApi.path}?appid=${params.appid}&secret=${params.secret}&js_code=${params.js_code}&grant_type=${params.grant_type}`,
+            method: 'GET'
+        }
+
+		const wxRequest = https.request(options, (response) => {
+            response.on('data', (d) => {
+                const data = JSON.parse(d.toString());
+
+				connection.query(`INSERT INTO usertable (openID,identity,username) VALUES ('${data.openid}','${identity}','${userName}')`, (err, database) => {
+					const state = err ? 0 : 1;
+					res.json({
+						code: 0,
+						openid: data.openid,
+						state
 					});
+					res.end();
 				});
+            });
+        });
 
-				req.on('error', (e) => {
-					console.error(e);
-				});
-				req.end();
-			} else {
-				res.json({
-					code: 1
-				});
-			}
-		});
-	}
+        wxRequest.on('error', (e) => {
+            console.error(e);
+        });
+		wxRequest.end();
+    } else {
+        res.json({
+            code: 1
+        });
+    }
 });
 
 module.exports = router;
