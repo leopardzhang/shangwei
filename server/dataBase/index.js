@@ -1,5 +1,8 @@
 const mysql = require('mysql');
-
+/**
+ * 数据库信息
+ * port默认为3306可以不填
+ */
 const connection = mysql.createConnection({
 	host     : 'localhost',
 	user     : 'root',
