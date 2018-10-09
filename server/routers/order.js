@@ -28,7 +28,7 @@ router.get('/info', (req, res, next) => {
 	}
 	keys = keys.substring(0, keys.length - 1);
 	values = values.substring(0, values.length - 1);
-	connection.query(`INSERT INTO ordertable (${keys}) VALUES (${values})`, (err, database, fields) => {
+	connection.query(`INSERT INTO ordertable (${keys},status) VALUES (${values},0)`, (err, database, fields) => {
 		if(err) {
 			console.log(err);
 		} else {
@@ -64,12 +64,23 @@ router.post('/images', upload.array('images', 9), (req, res, next) => {
 				}
 				res.end();
 			});
-        })
+        });
 	}
 });
 
 router.get('/search', (req, res, next) => {
-	
+	const searchType = req.query;
+
+	if(searchType) {
+		connection.query(`SELECT * FROM ordertable LEFT JOIN imagetable ON ordertable.id=imagetable.id`, (err, database) => {
+			res.json({
+				code: 0,
+				data: database
+			})
+		})
+	} else {
+
+	}
 });
 
 module.exports = router;

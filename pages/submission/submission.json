@@ -10,6 +10,7 @@
     "zan-icon": "../../dist/icon/index",
     "doc-page": "../../components/doc-page/index",
     "zan-badge": "../../dist/badge/index",
-    "zan-toast": "../../dist/toast/index"
+    "zan-toast": "../../dist/toast/index",
+    "zan-toptips": "../../dist/toptips/index"
   }
 }

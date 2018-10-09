@@ -73,7 +73,6 @@ Page({
       sendTime: formatTime(_this.data.sendTime, 1),
       salespersonID: app.globalData.openid
     });
-    console.log(formData);
     const promiseUpload = new Promise((resolve, reject) => {
       wx.request({
         url: `${app.globalData.url}/order/info`,
@@ -107,8 +106,13 @@ Page({
           }
         })
       }
+    }).catch((err) => {
+      Toptips('上传失败请检查网络或联系管理员');
     });
 
+    promiseUpload.then(()=> {
+      // 成功
+    });
     
   },
 
