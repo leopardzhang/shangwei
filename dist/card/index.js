@@ -19,7 +19,7 @@ Component({
     thumb: String,
     price: String,
     title: String,
-    num: Number,
+    time: String,
     desc: String,
     status: String
   }

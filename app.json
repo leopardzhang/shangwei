@@ -1,27 +1,33 @@
 {
-	"pages": [
-		"pages/submission/submission",
-		"pages/login/login",
-		"pages/search/search",
-		"pages/index/index",
-		"pages/logs/logs"
-	],
-	"window": {
-		"backgroundTextStyle": "light",
-		"navigationBarBackgroundColor": "#fff",
-		"navigationBarTitleText": "WeChat",
-		"navigationBarTextStyle": "black"
-	},
-	"tabBar": {
-		"list": [
-			{
-				"pagePath": "pages/submission/submission",
-				"text": "提交订单"
-			},
-			{
-				"pagePath": "pages/search/search",
-				"text": "查询订单"
-			}
-		]
-	}
+  "pages": [
+    "pages/login/login",
+    "pages/submission/submission",
+    "pages/index/index",
+    "pages/search/search",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "订单工具",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#999",
+    "selectedColor": "#1aad19",
+    "list": [
+      {
+        "pagePath": "pages/submission/submission",
+        "text": "提交订单",
+        "iconPath": "./images/send.png",
+        "selectedIconPath": "./images/send2.png"
+      },
+      {
+        "pagePath": "pages/search/search",
+        "text": "查询订单",
+        "iconPath": "./images/scan.png",
+        "selectedIconPath": "./images/scan2.png"
+      }
+    ]
+  }
 }

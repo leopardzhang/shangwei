@@ -25,3 +25,11 @@ picker {
   border-right: 8rpx solid transparent;
   border-left: 8rpx solid transparent;
 }
+
+.order_list {
+  margin-top: 20rpx;
+}
+
+.order_item {
+  padding-bottom: 10rpx;
+}

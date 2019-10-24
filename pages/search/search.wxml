@@ -20,4 +20,22 @@
       </picker>
     </zan-search>
   </zan-panel>
+  <view class="order_list">
+    <block wx:for="{{ [1,2,3,4,5] }}" wx:key="order">
+      <view class="order_item">
+          <zan-panel without-border>
+            <zan-card
+              card-class="test-card"
+              thumb="https://img.yzcdn.cn/upload_files/2016/11/25/FpqPXlrMRjKwJs8VdTu3ZDJCj4j5.jpeg?imageView2/2/w/200/h/200/q/90/format/jpeg"
+              price="噜啦嘿"
+              title="中兴大道160号"
+              desc="13674637162"
+              status="已发货"
+              time="2018/10/01 08:30"
+            >
+            </zan-card>
+          </zan-panel>
+      </view>
+    </block>
+  </view>
 </doc-page>

@@ -1,12 +1,15 @@
+const app = getApp();
+
 Page({
 	data: {
 		inputValue: '',
 		range: [
-			'日期', 
+			'日期',
 			'酒店',
-			'统筹师'
+			'状态'
 		],
-		rangeIndex: 0
+		rangeIndex: 0,
+    orderList: []
 	},
 
 	searchChange(e) {
@@ -19,5 +22,24 @@ Page({
 		this.setData({
 			rangeIndex: e.detail.value
 		})
-	}
+	},
+
+  //搜索事件
+  searchDone(e) {
+    const _this = this;
+
+    wx.request({
+      url: `${app.globalData.url}/order/search`,
+      data: {
+        type: _this.data.rangeIndex
+      },
+      method: 'GET',
+      success(res) {
+        console.log(res);
+      },
+      fail(err) {
+        
+      }
+    })
+  }
 });

@@ -1,11 +1,11 @@
-<doc-page title="员工登录" without-padding>
+<doc-page title="员工注册" without-padding>
   <!-- Field 基础用法 -->
   <form bindsubmit="formSubmit">
-    <zan-panel title="Welcome back! Please login">
+    <zan-panel title="首次登陆请注册">
       <zan-cell-group>
         <zan-field
-          title="用户名"
-          placeholder="输入用户名"
+          title="姓名"
+          placeholder="输入你的名字"
           name="userName"
           value="{{ userInfo.userName }}">
         </zan-field>
@@ -20,6 +20,13 @@
       </zan-cell-group>
     </zan-panel>
 
+    <zan-panel title="选择职位">
+      <zan-radio
+        items="{{ items }}"
+        bind:change="handleRadioChange"
+      ></zan-radio>
+    </zan-panel>
+
     <zan-button-group>
       <button
         type="primary"
@@ -29,5 +36,3 @@
     </zan-button-group>
   </form>
 </doc-page>
-
-<zan-toast id="zan-toast"></zan-toast>
