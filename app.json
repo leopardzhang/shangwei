@@ -1,27 +1,27 @@
 {
-  "pages": [
-		"pages/login/login",
+	"pages": [
 		"pages/submission/submission",
+		"pages/login/login",
 		"pages/search/search",
-    "pages/index/index",
-    "pages/logs/logs"
-  ],
-  "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black"
-  },
-  "tabBar": {
-    "list": [
-      {
-        "pagePath": "pages/submission/submission",
-        "text": "提交订单"
-      },
-      {
-        "pagePath": "pages/search/search",
-        "text": "查询订单"
-      }
-    ]
-  }
+		"pages/index/index",
+		"pages/logs/logs"
+	],
+	"window": {
+		"backgroundTextStyle": "light",
+		"navigationBarBackgroundColor": "#fff",
+		"navigationBarTitleText": "WeChat",
+		"navigationBarTextStyle": "black"
+	},
+	"tabBar": {
+		"list": [
+			{
+				"pagePath": "pages/submission/submission",
+				"text": "提交订单"
+			},
+			{
+				"pagePath": "pages/search/search",
+				"text": "查询订单"
+			}
+		]
+	}
 }
